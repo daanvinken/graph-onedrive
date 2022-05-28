@@ -19,7 +19,6 @@ from json.decoder import JSONDecodeError
 from pathlib import Path
 from time import sleep
 from typing import Any
-from typing import Optional
 
 import aiofiles
 import httpx
@@ -31,13 +30,9 @@ from graph_onedrive._decorators import token_required
 
 
 # Set logger
+from src.graph_onedrive._exceptions import GraphAPIError
+
 logger = logging.getLogger(__name__)
-
-
-class GraphAPIError(Exception):
-    """Exception raised when Graph API returns an error status."""
-
-    pass
 
 
 class OneDrive:

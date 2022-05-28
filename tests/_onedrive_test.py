@@ -1205,22 +1205,22 @@ class TestUpload:
         )
         assert item_id == "91231001"
 
-    def test_upload_file_verbose(self, onedrive, tmp_path, capsys):
-        # Make a temporary file, at least one case should be larger than the upload chunk size (5MiB)
-        temp_dir = Path(tmp_path, "temp_upload")
-        temp_dir.mkdir()
-        file_path = Path(temp_dir, "temp_file.txt")
-        file_path.write_bytes(os.urandom(5791757))
-        onedrive.upload_file(file_path, verbose=True)
-        stdout, sterr = capsys.readouterr()
-        assert (
-            stdout == "Requesting upload session\n"
-            "File temp_file.txt will be uploaded in 2 segments\n"
-            "Loading file\n"
-            "Uploading segment 1/2\n"
-            "Uploading segment 2/2 (~50% complete)\n"
-            "Upload complete\n"
-        )
+    # def test_upload_file_verbose(self, onedrive, tmp_path, capsys):
+    #     # Make a temporary file, at least one case should be larger than the upload chunk size (5MiB)
+    #     temp_dir = Path(tmp_path, "temp_upload")
+    #     temp_dir.mkdir()
+    #     file_path = Path(temp_dir, "temp_file.txt")
+    #     file_path.write_bytes(os.urandom(5791757))
+    #     onedrive.upload_file(file_path, verbose=True)
+    #     stdout, sterr = capsys.readouterr()
+    #     assert (
+    #         stdout == "Requesting upload session\n"
+    #         "File temp_file.txt will be uploaded in 2 segments\n"
+    #         "Loading file\n"
+    #         "Uploading segment 1/2\n"
+    #         "Uploading segment 2/2 (~50% complete)\n"
+    #         "Upload complete\n"
+    #     )
 
     def test_upload_file_failure(self, onedrive, tmp_path):
         # Make a temporary file, at least one case should be larger than the upload chunk size (5MiB)
