@@ -840,6 +840,7 @@ class OneDrive:
             "folder": {},
             "@microsoft.graph.conflictBehavior": conflict_behavior,
         }
+
         # Make the Graph API request
         response = httpx.post(request_url, headers=self._headers, json=body)
         # Validate request response and parse
@@ -847,6 +848,8 @@ class OneDrive:
             response, 201, "folder not created", has_json=True
         )
         response_data = response.json()
+        print(f"Request body:\n{body}")
+        print(f"Response body:\n{response.json()}")
         folder_id = response_data["id"]
         # Return the folder item id
         return folder_id
